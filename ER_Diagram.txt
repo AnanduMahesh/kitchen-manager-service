@@ -1,0 +1,66 @@
++-----------+          +-----------------+          +-----------+
+|   USER    |          |  HOUSE_MEMBER   |          |   HOUSE   |
++-----------+          +-----------------+          +-----------+
+| PK id     |<--+   +--| PK id           |--+   +-->| PK id     |
+| name      |   |   |  | FK user_id      |  |   |   | name      |
+| email     |   |   |  | FK house_id     |  |   |   | created_by|
+| password  |   |   |  | joined_at       |  |   |   | created_at|
+| createdAt |   |   |  | role (optional) |  |   |   +-----------+
++-----------+   |   |  +-----------------+  |   |
+                |   |                         |   |
+                |   +-------------------------+   |
+                |                                   |
+                +-----------------------------------+
+
+House → Item Relationship
+
++-----------+        1      *        +-----------+
+|   HOUSE   |---------------------->|   ITEM    |
++-----------+                       +-----------+
+| PK id     |                       | PK id     |
+| name      |                       | FK house_id
+| createdAt |                       | name      |
++-----------+                       | quantity  |
+                                    | unit      |
+                                    | expiry_dt |
+                                    | added_dt  |
+                                    | created_by|
+                                    +-----------+
+User → Recipe Relationship
+
++-----------+        1      *        +-----------+
+|   USER    |---------------------->|  RECIPE   |
++-----------+                       +-----------+
+| PK id     |                       | PK id     |
+| name      |                       | FK user_id
++-----------+                       | name      |
+                                    | description
+                                    | created_at
+                                    +-----------+
+
+Recipe → RecipeItem Relationship
++-----------+        1      *        +----------------+
+|  RECIPE   |---------------------->|  RECIPE_ITEM   |
++-----------+                       +----------------+
+| PK id     |                       | PK id          |
+| name      |                       | FK recipe_id   |
++-----------+                       | item_name      |
+                                    | required_qty   |
+                                    | unit           |
+                                    +----------------+
+
+Complete ER Diagram (Combined View)
+USER
+ ├──< HOUSE_MEMBER >── HOUSE
+ │                       └──< ITEM
+ │
+ └──< RECIPE >──< RECIPE_ITEM
+
+Cardinality Summary Table
+
+| Relationship        | Type         |
+| ------------------- | ------------ |
+| User ↔ House        | Many-to-Many |
+| House → Item        | One-to-Many  |
+| User → Recipe       | One-to-Many  |
+| Recipe → RecipeItem | One-to-Many  |

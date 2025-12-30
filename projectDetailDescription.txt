@@ -1,0 +1,174 @@
+Kitchen Manager – Detailed Project Description
+1. Purpose
+
+Kitchen Manager is an application to manage kitchen inventory for flats and houses, supporting multiple users, shared houses, and item tracking with expiry awareness, along with recipe management.
+
+2. User & House Management
+Users
+
+The application maintains a database of users.
+
+Each user can be a member of one or more houses.
+
+Houses
+
+A house represents a kitchen inventory space.
+
+A house:
+
+Can have multiple users (members).
+
+Is not uniquely identified by name.
+
+Example:
+
+House name MRRA1 → members: user1, user2, user3
+
+House name MRRA2 → members: user2, user4, user5
+
+Another MRRA1 may exist with completely different members.
+
+A user can:
+
+Create a new house and automatically become its member.
+
+View all houses they are a member of.
+
+Add users to a house if they are already a member.
+
+Remove users from a house if they are a member.
+
+View all members of a house if they are a member.
+
+🔑 Access control rule:
+A user can perform any house-related action only if they are a member of that house.
+
+3. Kitchen Items Management
+Item Properties
+
+Each kitchen item has:
+
+Name
+
+Quantity
+
+Unit (kg, litre, number, etc.)
+
+Expiry date
+
+Added date
+
+Item Operations
+
+A user (if house member) can:
+
+Add items to a house
+
+View items of a house
+
+Update items of a house
+
+Delete items of a house
+
+4. Item Search, Filter & Sort
+
+Across all houses the user is a member of, the user can:
+
+Search
+
+Search items by name
+
+Filters
+
+Filter items by:
+
+Expiry date range
+
+Added date range
+
+Quantity range
+
+Sort
+
+Sort items by:
+
+Name
+
+Expiry date
+
+Added date
+
+Quantity
+
+5. Expiry & Time-Based Views
+
+User can:
+
+View items expiring in the next N days (N provided by user)
+
+View expired items
+
+View items added in the last N days (N provided by user)
+
+6. Notifications
+
+User can receive notifications for:
+
+Items expiring in the next N days (N is user-configurable)
+
+Items that are already expired
+
+7. Recipe Management
+Recipe Properties
+
+A recipe contains:
+
+Name
+
+Description
+
+List of required items with quantity
+
+Recipe Operations
+
+User can:
+
+Create recipes
+
+View all recipes created by them
+
+Update their own recipes
+
+Delete their own recipes
+
+Search recipes by name
+
+Recipe Availability Check
+
+The user can check whether a recipe can be prepared based on:
+
+Items available in the house
+
+Required quantity vs available quantity
+
+8. High-Level Entity Relationships (Preview)
+
+This will help you later during DB design:
+
+User
+
+↔ Many-to-Many ↔ House
+
+House
+
+↔ One-to-Many ↔ Item
+
+User
+
+↔ One-to-Many ↔ Recipe
+
+Recipe
+
+↔ One-to-Many ↔ RecipeItem
+
+↔ References ↔ Item (by name or item master)

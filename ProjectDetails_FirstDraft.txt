@@ -1,0 +1,38 @@
+Kichen Manager app
+==================================
+The app is used to manag the kitchen items 
+
+There is a db to maintain the user details.
+each user have 1 or more houses. One house can be common be shared to multiple users.
+For for wxample there is one House named MRRA1 which has members user 1 user2 and user3.
+MRRA2 house has members user2 user4 and user5.
+There can be another house with same name with completely different members. so it can't be unique.
+Each house has multiple items. Each item has name, quantity, unit (kg, litre, number etc), expiry date, added date.
+User can add items to the house if they are member of the house.
+User can view items of the house if they are member of the house.
+User can delete items of the house if they are member of the house.
+User can update items of the house if they are member of the house.
+User can view all the houses they are member of.
+User can create new house and become member of the house.
+User can add other users to the house if they are member of the house.
+User can remove other users from the house if they are member of the house.
+User can view all the members of the house if they are member of the house.
+User can view items which are expiring in next N days where N is input by user.
+User can view items which are expired.
+User can view items which are added in last N days where N is input by user.
+User can search items by name across all houses they are member of.
+User can filter items by expiry date range across all houses they are member of.
+User can filter items by added date range across all houses they are member of.
+User can filter items by quantity range across all houses they are member of.
+User can sort items by name, expiry date, added date, quantity across all houses they are member of.
+User can get notification for items which are expiring in next N days where N is pre-configured by user.
+User can get notification for items which are expired.
+
+Also the user can prepare a recipe with the items he adding.
+The option to check the recipe is possible with the items available in the house.
+User can create a recipe with name, description, list of items required with quantity.
+User can view all recipes created by him.
+User can update recipes created by him.
+User can delete recipes created by him.
+User can search recipes by name.
+

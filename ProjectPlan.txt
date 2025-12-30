@@ -1,0 +1,299 @@
+PHASE 0 – Project Foundation (MANDATORY)
+0.1 Finalize Tech Stack (Decision Document)
+
+Since this is backend-only for now:
+
+Recommended (based on your profile):
+
+Java 17+
+
+Spring Boot 3.x
+
+Spring Security (JWT)
+
+PostgreSQL
+
+JPA + Hibernate
+
+Maven
+
+Flyway (DB migration)
+
+Lombok
+
+Swagger / OpenAPI
+
+Docker (later)
+
+📄 Outcome: Tech stack document (1 page)
+
+0.2 Define Non-Functional Requirements
+
+Corporate clients always ask this.
+
+Authentication & Authorization → JWT
+
+Scalability → REST-based, stateless
+
+Security → Role-based access
+
+Auditing → createdAt, createdBy
+
+Performance → pagination, indexing
+
+Maintainability → layered architecture
+
+📄 Outcome: NFR checklist
+
+PHASE 1 – Project Setup (START HERE)
+1️⃣ Create Spring Boot Skeleton
+
+This is the actual starting point.
+
+Modules (Single service for now)
+kitchen-manager-backend
+
+
+Dependencies:
+
+Spring Web
+
+Spring Data JPA
+
+Spring Security
+
+PostgreSQL Driver
+
+Validation
+
+Lombok
+
+OpenAPI
+
+📌 Why first?
+
+Every developer works on same base
+
+CI/CD later plugs into this
+
+1.2 Define Package Structure (VERY IMPORTANT)
+
+Corporate-grade structure:
+
+com.kitchenmanager
+ ├── config
+ ├── controller
+ ├── dto
+ ├── entity
+ ├── repository
+ ├── service
+ │    └── impl
+ ├── security
+ ├── exception
+ ├── mapper
+ └── util
+
+
+📌 This avoids chaos when project grows.
+
+PHASE 2 – Database Layer First (Always)
+2️⃣ Implement Database Schema
+
+Start with DB, not APIs.
+
+Steps:
+
+Create PostgreSQL DB
+
+Add Flyway
+
+Create migration scripts:
+
+user
+
+house
+
+house_member
+
+item
+
+recipe
+
+recipe_item
+
+📌 Why DB-first?
+
+Backend APIs depend on schema
+
+Changes later are expensive
+
+📄 Outcome: Versioned DB schema
+
+PHASE 3 – Core Entities & Repositories
+3️⃣ Implement JPA Entities
+
+Map ER diagram → entities.
+
+Order:
+
+User
+
+House
+
+HouseMember
+
+Item
+
+Recipe
+
+RecipeItem
+
+Add:
+
+@Entity
+
+@ManyToOne, @OneToMany
+
+Auditing fields
+
+📌 No business logic here.
+
+3.2 Repositories
+
+For each entity:
+
+JpaRepository
+
+Custom queries where needed
+
+Example:
+
+findByUserId
+
+findByHouseId
+
+findExpiringItems()
+
+📄 Outcome: Data access layer ready
+
+PHASE 4 – Security (DO THIS EARLY)
+4️⃣ Authentication & Authorization
+4.1 Authentication
+
+User registration
+
+Login
+
+JWT generation
+
+4.2 Authorization Rules
+
+Only house members → house APIs
+
+Only recipe owner → recipe APIs
+
+📌 Security must be in place before APIs go live.
+
+PHASE 5 – Service Layer (Business Logic)
+5️⃣ Implement Services (ORDER MATTERS)
+Priority Order:
+
+UserService
+
+HouseService
+
+HouseMemberService
+
+ItemService
+
+RecipeService
+
+Service responsibilities:
+
+Membership validation
+
+Business rules
+
+Transactions
+
+📌 Controllers should be thin.
+
+PHASE 6 – REST API Layer
+6️⃣ Controllers (Expose APIs)
+
+Design APIs resource-based:
+
+/auth/*
+
+/houses
+
+/houses/{id}/items
+
+/recipes
+
+Add:
+
+Pagination
+
+Sorting
+
+Filtering
+
+📄 Outcome: Functional REST backend
+
+PHASE 7 – Advanced Features
+7️⃣ Notifications & Schedulers
+
+Expiry checks using @Scheduled
+
+User-specific notification config
+
+7.2 Recipe Availability Engine
+
+Compare inventory vs recipe requirements
+
+Return missing items list
+
+PHASE 8 – Quality & Delivery
+8️⃣ Enterprise Essentials
+
+Global exception handling
+
+Validation using @Valid
+
+Logging
+
+Swagger docs
+
+Unit tests (JUnit + Mockito)
+
+PHASE 9 – Deployment Readiness
+
+Dockerfile
+
+Environment profiles
+
+CI/CD ready
+
+
+REAL CORPORATE EXECUTION ORDER (SUMMARY)
+*-------------------------------------------------------*
+ER Diagram ✅
+↓
+Project Setup
+↓
+DB Schema (Flyway)
+↓
+Entities + Repositories
+↓
+Security (JWT)
+↓
+Services
+↓
+Controllers
+↓
+Advanced Features
+↓
+Testing & Docs
+↓
+Deployment
