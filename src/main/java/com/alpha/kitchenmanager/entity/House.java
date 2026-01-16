@@ -1,14 +1,17 @@
 package com.alpha.kitchenmanager.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="house")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
