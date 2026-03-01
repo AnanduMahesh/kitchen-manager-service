@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="house")
@@ -27,4 +29,7 @@ public class House {
     private User createdBy;
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @ManyToMany(mappedBy = "houses")
+    private Set<User> users = new HashSet<>();
 }
