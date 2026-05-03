@@ -1,7 +1,7 @@
 package com.alpha.kitchenmanager.service.impl;
 
 import com.alpha.kitchenmanager.dto.request.LoginRequestDTO;
-import com.alpha.kitchenmanager.dto.request.LoginResponseDTO;
+import com.alpha.kitchenmanager.dto.response.LoginResponseDTO;
 import com.alpha.kitchenmanager.dto.request.UserRequestDTO;
 import com.alpha.kitchenmanager.dto.response.UserResponseDTO;
 import com.alpha.kitchenmanager.entity.User;
@@ -67,11 +67,8 @@ public class UserServiceImpl implements UserService {
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new InvalidCredentialsException("Invalid email or password");
         }
-        return new LoginResponseDTO(
-                user.getId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getRole().name()
-        );
+        String token = jwtUtil.generateToken(user.getEmail(),user.getRole());
+
+        return new LoginResponseDTO(token);
     }
 }

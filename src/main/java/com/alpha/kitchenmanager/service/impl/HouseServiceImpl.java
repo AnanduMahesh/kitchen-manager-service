@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,6 +52,21 @@ public class HouseServiceImpl implements HouseService {
 
     }
 
+    @Override
+    public List<HouseResponseDTO> getMyHouses() {
+        // 1️⃣ Get logged-in user email
+        String email = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+        // 2️⃣ Fetch user from DB
+        List<House> houses = houseRepository.findByUsersEmail(email);
+
+        // 3️⃣ Map user's houses to DTOs
+        return houses.stream()
+                .map(this::mapToDTO)
+                .toList();
+
+    }
     private HouseResponseDTO mapToDTO(House house) {
 
         HouseResponseDTO dto = new HouseResponseDTO();
